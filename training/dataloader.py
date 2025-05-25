@@ -45,8 +45,10 @@ class SpeechToTextDataset(Dataset):
         book_id, chapter_id, _ = self._files[idx].split("-")
         path: Path = self._dataset_root/book_id/chapter_id/self._files[idx]
         audio = torchaudio.load(path, format="flac")
-
-        return self.transform(audio[0]).permute(0,2,1).squeeze(0), torch.tensor([ord(c)-96 for c in self._labels[self._files[idx]]]).clamp(0,27)
+        if audio[0].size()[0] == 2:
+            audio = (audio[0][0].unsqueeze(0), 16000)
+        text = torch.tensor([ord(c)-96 for c in self._labels[self._files[idx]]]).clamp(0,27)
+        return self.transform(audio[0]).permute(0,2,1).squeeze(0), text
 
 
 class TextToTextDataset(SpeechToTextDataset):

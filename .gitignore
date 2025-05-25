@@ -2,3 +2,4 @@ venv/
 Checkpoints
 __pycache__
 CurrentlyBest
+mydataset

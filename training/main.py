@@ -48,7 +48,7 @@ if __name__ == "__main__":
     if os.getenv("CHECKPOINT"):
         model.load_state_dict(torch.load(os.getenv("CHECKPOINT")))
     dataset = SpeechToTextDataset(Path(os.getenv("TRAINDATASET")))
-    test_dataset = SpeechToTextDataset(Path("TESTDATASET"))
+    test_dataset = SpeechToTextDataset(Path(os.getenv("TESTDATASET")))
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     num_epochs = int(os.getenv("EPOCHS", 10))
     start_epoch = int(os.getenv("START", 0))

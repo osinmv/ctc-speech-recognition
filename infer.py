@@ -7,7 +7,7 @@ DEVICE = "cpu"
 if torch.cuda.is_available():
     DEVICE = "cuda"
 
-## TO RECORD ffmpeg -f alsa -ac 1 -ar 16000 -i default -t 10 output.flac
+## TO RECORD ffmpeg -f alsa -ac 1 -ar 16000 -i default -t 10 -ac 1 output.flac
 
 
 if __name__ == "__main__":

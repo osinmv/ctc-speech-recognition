@@ -10,7 +10,7 @@ model = CharLM(28, 128, 128).to("cuda")
 loss_fn = torch.nn.CrossEntropyLoss(ignore_index=0)
 optimizer = torch.optim.Adam(model.parameters())
 dataset = TextToTextDataset(Path(os.getenv("TRAINDATASET")))
-test_dataset = TextToTextDataset(os.getenv("TESTDATASET"))
+test_dataset = TextToTextDataset(Path(os.getenv("TESTDATASET")))
 dataloader = torch.utils.data.DataLoader(dataset, batch_size=16, collate_fn=my_collate_fn, shuffle=True)
 test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size=16, collate_fn=my_collate_fn, shuffle=True)
 for epoch in range(int(os.getenv("EPOCHS", 30))):
